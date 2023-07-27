@@ -1,0 +1,12 @@
+opencti:
+  url: 'http://10.0.0.138:8080'
+  token: '1d2f63af-6fcc-4757-95fa-9c525a5375d2'
+
+connector:
+  id: '12c86036-b8fe-4d8b-93a0-fd7b02e4635f'
+  type: 'INTERNAL_ENRICHMENT'
+  name: 'Vulnerabilty Email Alert'
+  scope: 'vulnerability' # MIME type or SCO
+  confidence_level: 100 # From 0 (Unknown) to 100 (Fully trusted)
+  log_level: 'info'
+  email_pass: 'tnzn afsj hgso zrbe'

@@ -1,0 +1,17 @@
+opencti:
+  url: 'http://localhost:8080/opencti'
+  token: '486bb54e-4f3d-4d40-a4da-ccff061a6c49'
+
+connector:
+  id: 'd313c275-fcff-4c78-a71a-0f487ab11c5d'
+  type: 'INTERNAL_IMPORT_FILE'
+  name: 'ImportDocument'
+  validate_before_import: true # Validate any bundle before import
+  scope: 'application/pdf,text/plain,text/html,text/csv,text/markdown'
+  auto: false # Enable/disable auto-import of file
+  only_contextual: false # Only extract data related to an entity (a report, a threat actor, etc.)
+  confidence_level: 100 # From 0 (Unknown) to 100 (Fully trusted)
+  log_level: 'info'
+
+import_document:
+  create_indicator: true 

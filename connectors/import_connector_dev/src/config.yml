@@ -1,0 +1,11 @@
+opencti:
+  url: 'http://opencti:8080'
+  token: '1d2f63af-6fcc-4757-95fa-9c525a5375d2'
+
+connector:
+  id: '032198a8-58b9-487a-9aad-a3bc8c00dacb'
+  type: 'INTERNAL_IMPORT_FILE'
+  name: 'BulkCsv'
+  scope: 'text/csv' # MIME type or SCO
+  confidence_level: 100 # From 0 (Unknown) to 100 (Fully trusted)
+  log_level: 'info'
