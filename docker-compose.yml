@@ -120,48 +120,64 @@ services:
       # mode: replicated
       # replicas: 1
     restart: unless-stopped
-  connector-export-file-stix:
-    image: opencti/connector-export-file-stix:${OPENCTI_VERSION}
-    environment:
-      - OPENCTI_URL=${OPENCTI_INTERNAL_URL}${OPENCTI_BASE_PATH}
-      - OPENCTI_TOKEN=${OPENCTI_ADMIN_TOKEN}
-      - CONNECTOR_ID=${CONNECTOR_EXPORT_FILE_STIX_ID} # Valid UUIDv4
-      - CONNECTOR_TYPE=INTERNAL_EXPORT_FILE
-      - CONNECTOR_NAME=ExportFileStix2
-      - CONNECTOR_SCOPE=application/json
-      - CONNECTOR_CONFIDENCE_LEVEL=15 # From 0 (Unknown) to 100 (Fully trusted)
-      - CONNECTOR_LOG_LEVEL=error
-    restart: unless-stopped
-    depends_on:
-      - opencti
-  connector-export-file-csv:
-    image: opencti/connector-export-file-csv:${OPENCTI_VERSION}
-    environment:
-      - OPENCTI_URL=${OPENCTI_INTERNAL_URL}${OPENCTI_BASE_PATH}
-      - OPENCTI_TOKEN=${OPENCTI_ADMIN_TOKEN}
-      - CONNECTOR_ID=${CONNECTOR_EXPORT_FILE_CSV_ID} # Valid UUIDv4
-      - CONNECTOR_TYPE=INTERNAL_EXPORT_FILE
-      - CONNECTOR_NAME=ExportFileCsv
-      - CONNECTOR_SCOPE=text/csv
-      - CONNECTOR_CONFIDENCE_LEVEL=15 # From 0 (Unknown) to 100 (Fully trusted)
-      - CONNECTOR_LOG_LEVEL=error
-    restart: unless-stopped
-    depends_on:
-      - opencti
-  connector-export-file-txt:
-    image: opencti/connector-export-file-txt:${OPENCTI_VERSION}
-    environment:
-      - OPENCTI_URL=${OPENCTI_INTERNAL_URL}${OPENCTI_BASE_PATH}
-      - OPENCTI_TOKEN=${OPENCTI_ADMIN_TOKEN}
-      - CONNECTOR_ID=${CONNECTOR_EXPORT_FILE_TXT_ID} # Valid UUIDv4
-      - CONNECTOR_TYPE=INTERNAL_EXPORT_FILE
-      - CONNECTOR_NAME=ExportFileTxt
-      - CONNECTOR_SCOPE=text/plain
-      - CONNECTOR_CONFIDENCE_LEVEL=15 # From 0 (Unknown) to 100 (Fully trusted)
-      - CONNECTOR_LOG_LEVEL=error
-    restart: unless-stopped
-    depends_on:
-      - opencti
+  # connector-export-file-stix:
+  #   image: opencti/connector-export-file-stix:${OPENCTI_VERSION}
+  #   environment:
+  #     - OPENCTI_URL=${OPENCTI_INTERNAL_URL}${OPENCTI_BASE_PATH}
+  #     - OPENCTI_TOKEN=${OPENCTI_ADMIN_TOKEN}
+  #     - CONNECTOR_ID=${CONNECTOR_EXPORT_FILE_STIX_ID} # Valid UUIDv4
+  #     - CONNECTOR_TYPE=INTERNAL_EXPORT_FILE
+  #     - CONNECTOR_NAME=ExportFileStix2
+  #     - CONNECTOR_SCOPE=application/json
+  #     - CONNECTOR_CONFIDENCE_LEVEL=15 # From 0 (Unknown) to 100 (Fully trusted)
+  #     - CONNECTOR_LOG_LEVEL=error
+  #   restart: unless-stopped
+  #   depends_on:
+  #     - opencti
+  # connector-export-file-csv:
+  #   image: opencti/connector-export-file-csv:${OPENCTI_VERSION}
+  #   environment:
+  #     - OPENCTI_URL=${OPENCTI_INTERNAL_URL}${OPENCTI_BASE_PATH}
+  #     - OPENCTI_TOKEN=${OPENCTI_ADMIN_TOKEN}
+  #     - CONNECTOR_ID=${CONNECTOR_EXPORT_FILE_CSV_ID} # Valid UUIDv4
+  #     - CONNECTOR_TYPE=INTERNAL_EXPORT_FILE
+  #     - CONNECTOR_NAME=ExportFileCsv
+  #     - CONNECTOR_SCOPE=text/csv
+  #     - CONNECTOR_CONFIDENCE_LEVEL=15 # From 0 (Unknown) to 100 (Fully trusted)
+  #     - CONNECTOR_LOG_LEVEL=error
+  #   restart: unless-stopped
+  #   depends_on:
+  #     - opencti
+  # connector-export-file-txt:
+  #   image: opencti/connector-export-file-txt:${OPENCTI_VERSION}
+  #   environment:
+  #     - OPENCTI_URL=${OPENCTI_INTERNAL_URL}${OPENCTI_BASE_PATH}
+  #     - OPENCTI_TOKEN=${OPENCTI_ADMIN_TOKEN}
+  #     - CONNECTOR_ID=${CONNECTOR_EXPORT_FILE_TXT_ID} # Valid UUIDv4
+  #     - CONNECTOR_TYPE=INTERNAL_EXPORT_FILE
+  #     - CONNECTOR_NAME=ExportFileTxt
+  #     - CONNECTOR_SCOPE=text/plain
+  #     - CONNECTOR_CONFIDENCE_LEVEL=15 # From 0 (Unknown) to 100 (Fully trusted)
+  #     - CONNECTOR_LOG_LEVEL=error
+  #   restart: unless-stopped
+  #   depends_on:
+  #     - opencti
+  #       #connector-feedly:
+        #  image: opencti/connector-feedly:5.12.29
+        #  environment:
+        #    - OPENCTI_URL=http://localhost:8080/opencti
+        #    - OPENCTI_TOKEN=${OPENCTI_ADMIN_TOKEN}
+        #    - CONNECTOR_ID=beb35578-6c48-4abb-b1e4-b39e692d091a
+        #    - CONNECTOR_TYPE=EXTERNAL_IMPORT
+        #    - CONNECTOR_NAME=Feedly
+        #    - CONNECTOR_SCOPE=feedly # MIME type or Stix Object
+        #    - CONNECTOR_CONFIDENCE_LEVEL=100 # From 0 (Unknown) to 100 (Fully trusted)
+        #    - CONNECTOR_LOG_LEVEL=error
+        #    - FEEDLY_INTERVAL=60 # in minutes
+        #    - FEEDLY_STREAM_IDS=enterprise/morganstanleytechnologyo/category/cf46369a-3aa1-4082-89ec-7ac1f33e00a7
+        #    - FEEDLY_DAYS_TO_BACK_FILL=1 # Number of days to back fill for new stream ids
+        #    - FEEDLY_API_KEY=fe_CD5lIIqc5BJTziqxPre7OcLH1VN2uw7hYafyuTSu # Feedly API key to generate here https://feedly.com/i/team/api
+        #  restart: always
   #  connector-misp:
   #    image: opencti/connector-misp:5.3.7
   #    environment:
@@ -202,22 +218,22 @@ services:
   #    restart: always
   #    depends_on:
   # #      - opencti
-  connector-import-file-stix:
-    image: opencti/connector-import-file-stix:${OPENCTI_VERSION}
-    environment:
-      - OPENCTI_URL=${OPENCTI_INTERNAL_URL}${OPENCTI_BASE_PATH}
-      - OPENCTI_TOKEN=${OPENCTI_ADMIN_TOKEN}
-      - CONNECTOR_ID=${CONNECTOR_IMPORT_FILE_STIX_ID} # Valid UUIDv4
-      - CONNECTOR_TYPE=INTERNAL_IMPORT_FILE
-      - CONNECTOR_NAME=ImportFileStix
-      - CONNECTOR_VALIDATE_BEFORE_IMPORT=true # Validate any bundle before import
-      - CONNECTOR_SCOPE=application/json,text/xml
-      - CONNECTOR_AUTO=true # Enable/disable auto-import of file
-      - CONNECTOR_CONFIDENCE_LEVEL=15 # From 0 (Unknown) to 100 (Fully trusted)
-      - CONNECTOR_LOG_LEVEL=error
-    restart: unless-stopped
-    depends_on:
-      - opencti
+  # connector-import-file-stix:
+  #   image: opencti/connector-import-file-stix:${OPENCTI_VERSION}
+  #   environment:
+  #     - OPENCTI_URL=${OPENCTI_INTERNAL_URL}${OPENCTI_BASE_PATH}
+  #     - OPENCTI_TOKEN=${OPENCTI_ADMIN_TOKEN}
+  #     - CONNECTOR_ID=${CONNECTOR_IMPORT_FILE_STIX_ID} # Valid UUIDv4
+  #     - CONNECTOR_TYPE=INTERNAL_IMPORT_FILE
+  #     - CONNECTOR_NAME=ImportFileStix
+  #     - CONNECTOR_VALIDATE_BEFORE_IMPORT=true # Validate any bundle before import
+  #     - CONNECTOR_SCOPE=application/json,text/xml
+  #     - CONNECTOR_AUTO=true # Enable/disable auto-import of file
+  #     - CONNECTOR_CONFIDENCE_LEVEL=15 # From 0 (Unknown) to 100 (Fully trusted)
+  #     - CONNECTOR_LOG_LEVEL=error
+  #   restart: unless-stopped
+  #   depends_on:
+  #     - opencti
   #  connector-misp-feed:
   #    image: opencti/connector-misp-feed:${OPENCTI_VERSION}
   #    environment:
@@ -246,23 +262,23 @@ services:
   #    restart: always
   #    depends_on:
   ##      - opencti
-  ##  connector-hygiene:
-  ##    image: opencti/connector-hygiene:${OPENCTI_VERSION}
-  ##    environment:
-  ##      - OPENCTI_URL=${OPENCTI_INTERNAL_URL}${OPENCTI_BASE_PATH}
-  ##      - OPENCTI_TOKEN=${OPENCTI_ADMIN_TOKEN}
-  ##      - CONNECTOR_ID=${CONNECTOR_HYGIENE_ID}
-  ##      - CONNECTOR_TYPE=INTERNAL_ENRICHMENT
-  ##      - CONNECTOR_NAME=Hygiene
-  ##      - CONNECTOR_SCOPE=IPv4-Addr,IPv6-Addr,Domain-Name,StixFile,Artifact,Stix-Cyber-Observable
-  ##      - CONNECTOR_AUTO=true
-  ##      - CONNECTOR_CONFIDENCE_LEVEL=15 # From 0 (Unknown) to 100 (Fully trusted)
-  ##      - CONNECTOR_LOG_LEVEL=info
-  ##      - HYGIENE_WARNINGLISTS_SLOW_SEARCH=false # Enable warning lists slow search mode
-  ##      - HYGIENE_ENRICH_SUBDOMAINS=false # Enrich subdomains with hygiene_parent label if the parents are found in warninglists
-  ##    restart: unless-stopped
-  ##    depends_on:
-  ##      - opencti
+  connector-hygiene:
+    image: opencti/connector-hygiene:${OPENCTI_VERSION}
+    environment:
+      - OPENCTI_URL=${OPENCTI_INTERNAL_URL}${OPENCTI_BASE_PATH}
+      - OPENCTI_TOKEN=${OPENCTI_ADMIN_TOKEN}
+      - CONNECTOR_ID=${CONNECTOR_HYGIENE_ID}
+      - CONNECTOR_TYPE=INTERNAL_ENRICHMENT
+      - CONNECTOR_NAME=Hygiene
+      - CONNECTOR_SCOPE=IPv4-Addr,IPv6-Addr,Domain-Name,StixFile,Artifact,Stix-Cyber-Observable
+      - CONNECTOR_AUTO=true
+      - CONNECTOR_CONFIDENCE_LEVEL=15 # From 0 (Unknown) to 100 (Fully trusted)
+      - CONNECTOR_LOG_LEVEL=info
+      - HYGIENE_WARNINGLISTS_SLOW_SEARCH=false # Enable warning lists slow search mode
+      - HYGIENE_ENRICH_SUBDOMAINS=false # Enrich subdomains with hygiene_parent label if the parents are found in warninglists
+    restart: unless-stopped
+    depends_on:
+      - opencti
   ###  kibana:
   ##    image: docker.elastic.co/kibana/kibana:7.17.5
   ##    environment:
@@ -291,24 +307,24 @@ services:
   ##      # - MITRE_CAPEC_FILE_URL=https://raw.githubusercontent.com/mitre/cti/master/capec/2.1/stix-capec.json
   ##    - MITRE_INTERVAL=7 # In days, must be strictly greater than 1
   #  restart: always
-  connector-import-document:
-   image: opencti/connector-import-document:${OPENCTI_VERSION}
-   environment:
-     - OPENCTI_URL=${OPENCTI_INTERNAL_URL}${OPENCTI_BASE_PATH}
-     - OPENCTI_TOKEN=${OPENCTI_ADMIN_TOKEN}
-     - CONNECTOR_ID=${CONNECTOR_IMPORT_DOCUMENT_ID} # Valid UUIDv4
-     - CONNECTOR_TYPE=INTERNAL_IMPORT_FILE
-     - CONNECTOR_NAME=ImportDocument
-     - CONNECTOR_VALIDATE_BEFORE_IMPORT=true # Validate any bundle before import
-     - CONNECTOR_SCOPE=application/pdf,text/plain,text/html,text/csv,text/markdown
-     - CONNECTOR_AUTO=false # Enable/disable auto-import of file
-     - CONNECTOR_ONLY_CONTEXTUAL=false # Only extract data related to an entity (a report, a threat actor, etc.)
-     - CONNECTOR_CONFIDENCE_LEVEL=15 # From 0 (Unknown) to 100 (Fully trusted)
-     - CONNECTOR_LOG_LEVEL=info
-     - IMPORT_DOCUMENT_CREATE_INDICATOR=true
-   restart: unless-stopped
-   depends_on:
-     - opencti
+  # connector-import-document:
+  #  image: opencti/connector-import-document:${OPENCTI_VERSION}
+  #  environment:
+  #    - OPENCTI_URL=${OPENCTI_INTERNAL_URL}${OPENCTI_BASE_PATH}
+  #    - OPENCTI_TOKEN=${OPENCTI_ADMIN_TOKEN}
+  #    - CONNECTOR_ID=${CONNECTOR_IMPORT_DOCUMENT_ID} # Valid UUIDv4
+  #    - CONNECTOR_TYPE=INTERNAL_IMPORT_FILE
+  #    - CONNECTOR_NAME=ImportDocument
+  #    - CONNECTOR_VALIDATE_BEFORE_IMPORT=true # Validate any bundle before import
+  #    - CONNECTOR_SCOPE=application/pdf,text/plain,text/html,text/csv,text/markdown
+  #    - CONNECTOR_AUTO=false # Enable/disable auto-import of file
+  #    - CONNECTOR_ONLY_CONTEXTUAL=false # Only extract data related to an entity (a report, a threat actor, etc.)
+  #    - CONNECTOR_CONFIDENCE_LEVEL=15 # From 0 (Unknown) to 100 (Fully trusted)
+  #    - CONNECTOR_LOG_LEVEL=info
+  #    - IMPORT_DOCUMENT_CREATE_INDICATOR=true
+  #  restart: unless-stopped
+  #  depends_on:
+  #    - opencti
         #  connector-import-external-ref:
         #    image: opencti/connector-import-external-reference:5.3.17
         #    environment:
